@@ -1,39 +1,60 @@
-package LinkedLists.SinglyLinkedList.Insertion;
+package LinkedLists.DoublyLinkedList.Insertion;
 
-class Node {
-    public int data;
+class Node
+{
+    public int value;
     public Node next;
+    public Node prev;
 
-    public Node(int data1, Node next1) {
-        data = data1;
-        next = next1;
+    Node()
+    {
+        this.value = 0;
+        this.next = null;
+        this.prev = null;
     }
-    public Node(int data1) {
-        data = data1;
-        next = null;
-    }
-}public class InsertHead {
-    public static void printLL(Node head) {
-        while (head != null) {
-            System.out.print(head.data + " ");
-            head = head.next;
-        }
-    }
-    public static Node insertHead(Node head, int val) {
-        Node temp = new Node(val, head);
-        return temp;
-    }
-    public static void main(String[] args) {
-        int arr[] = {12, 8, 5, 7};
-        int val = 100;
 
-        Node head = new Node(arr[0]);
-        head.next = new Node(arr[1]);
-        head.next.next = new Node(arr[2]);
-        head.next.next.next = new Node(arr[3]);
+    Node(int value)
+    {
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
 
-        head = insertHead(head, val);
-        printLL(head);
+    Node(int value, Node next, Node prev)
+    {
+        this.value = value;
+        this.next = next;
+        this.prev = prev;
     }
 }
 
+public class InsertHead {
+    public static Node insertAtFront(Node head, int k) {
+        Node newNode = new Node(k);
+
+        if (head == null) {
+            return newNode;
+        }
+
+        newNode.next = head;
+        head.prev = newNode;
+
+        return newNode;
+    }
+    public static void PrintLL(Node head){
+        while(head!=null){
+            System.out.print(head.value + " ");
+            head = head.next;
+        }System.out.println();
+    }
+    public static void main(String[] args) {
+        Node head = new Node(11);
+        head.next = new Node(12);
+        head.next.next = new Node(13);
+        head.next.next.next = new Node(14);
+
+        head = insertAtFront(head, 10);
+        PrintLL(head);
+
+    }
+}
